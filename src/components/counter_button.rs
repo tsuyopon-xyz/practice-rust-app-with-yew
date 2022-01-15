@@ -6,6 +6,7 @@ pub fn counter_button() -> Html {
     let counter = counter_context::use_counter();
     let onclick = Callback::from(move |_| {
         log::info!("TODO: incremnt in Callback {:#?}", counter);
+        todo!();
         // counter.increment();
     });
 
