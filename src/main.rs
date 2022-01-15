@@ -1,5 +1,8 @@
 use yew::prelude::*;
 use yew_app::components::button::Button;
+use yew_app::components::counter_button::CounterButton;
+use yew_app::components::counter_display::CounterDisplay;
+use yew_app::contexts::counter_context::CounterProvider;
 
 enum Msg {
     AddOne,
@@ -29,22 +32,23 @@ impl Component for Model {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        let onclick = |_: MouseEvent| Msg::AddOne;
-
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         let link = ctx.link();
-        let callback = link.callback(onclick);
+
         html! {
-            <div>
-                // <button onclick={link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
-                // <button onclick={callback}>{ "+1" }</button>
-                <p>{ self.value }</p>
-                <Button title={String::from("ボタン")} onclick={callback}/>
-            </div>
+            <CounterProvider>
+                <div>
+                    <p>{ self.value }</p>
+                    <Button title={String::from("ボタン1")} onclick={link.callback(|_: MouseEvent| Msg::AddOne)}/>
+                    <CounterDisplay />
+                    <CounterButton />
+                </div>
+            </CounterProvider>
         }
     }
 }
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     yew::start_app::<Model>();
 }
