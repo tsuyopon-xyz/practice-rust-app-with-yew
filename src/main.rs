@@ -7,7 +7,7 @@ use yew_app::contexts::counter_context::CounterProvider;
 pub fn app() -> Html {
     html! {
         <CounterProvider>
-            <div class="flex flex-col justify-center items-center gap-4 w-full h-full">
+            <div class="flex flex-col justify-center items-center gap-4 w-full h-full ">
                 <CounterDisplay />
                 <CounterButton />
             </div>

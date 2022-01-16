@@ -1,1 +1,10 @@
 /target
+
+node_modules
+
+# For trunk assets setting
+# Docs:    https://trunkrs.dev/assets/
+# Example: https://github.com/thedodd/trunk/blob/master/examples/yew/index.html
+# /styles/dist/
+styles/dist/*
+!**/.gitkeep
