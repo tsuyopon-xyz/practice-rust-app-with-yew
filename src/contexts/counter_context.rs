@@ -1,43 +1,58 @@
+use std::rc::Rc;
 use yew::{
-    function_component, html, use_context, use_state, Children, ContextProvider, Html, Properties,
+    function_component, html, use_context, use_reducer, Children, ContextProvider, Properties,
+    Reducible, UseReducerHandle,
 };
 
-#[derive(Properties, Clone, PartialEq)]
+#[derive(Properties, Clone, PartialEq, Debug)]
 pub struct Props {
-    #[prop_or_default]
     pub children: Children,
 }
 
-#[derive(Clone, Debug, PartialEq)]
-pub struct Count {
-    count: usize,
+pub enum CounterAction {
+    Increment,
 }
 
-impl Count {
-    pub fn increment(&mut self) {
-        self.count += 1;
-    }
+#[derive(Clone, Debug, PartialEq)]
+pub struct Counter {
+    pub value: usize,
+}
 
-    pub fn current(&self) -> usize {
-        self.count
+impl Default for Counter {
+    fn default() -> Self {
+        Self { value: 0 }
+    }
+}
+
+impl Reducible for Counter {
+    /// Reducer Action Type
+    type Action = CounterAction;
+
+    /// Reducer Function
+    fn reduce(self: Rc<Self>, action: Self::Action) -> Rc<Self> {
+        let next_ctr = match action {
+            CounterAction::Increment => self.value + 1,
+        };
+
+        Self { value: next_ctr }.into()
     }
 }
 
 /// Main component
 #[function_component(CounterProvider)]
 pub fn counter_provider(props: &Props) -> Html {
-    let ctx = use_state(|| Count { count: 0 });
+    let counter = use_reducer(Counter::default);
 
     html! {
-        <ContextProvider<Count> context={(*ctx).clone()}>
+        <ContextProvider<UseReducerHandle<Counter>> context={counter}>
             // Every child here and their children will have access to this context.
             { for props.children.iter() }
-        </ContextProvider<Count>>
+        </ContextProvider<UseReducerHandle<Counter>>>
     }
 }
 
-pub fn use_counter() -> Count {
-    let ctx = use_context::<Count>().expect("no ctx found");
+pub fn use_counter() -> UseReducerHandle<Counter> {
+    let ctx = use_context::<UseReducerHandle<Counter>>().expect("no ctx found");
 
     ctx
 }

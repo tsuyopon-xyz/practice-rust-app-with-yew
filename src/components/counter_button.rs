@@ -1,13 +1,11 @@
-use crate::contexts::counter_context;
-use yew::{function_component, html, use_effect_with_deps, Callback};
+use crate::contexts::counter_context::{self, CounterAction};
+use yew::{function_component, html, Callback};
 
 #[function_component(CounterButton)]
 pub fn counter_button() -> Html {
     let counter = counter_context::use_counter();
     let onclick = Callback::from(move |_| {
-        log::info!("TODO: incremnt in Callback {:#?}", counter);
-        todo!();
-        // counter.increment();
+        counter.dispatch(CounterAction::Increment);
     });
 
     html! {
