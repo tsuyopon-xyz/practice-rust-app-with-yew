@@ -1,6 +1,7 @@
 /target
 
 node_modules
+dist
 
 # For trunk assets setting
 # Docs:    https://trunkrs.dev/assets/
