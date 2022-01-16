@@ -6,7 +6,7 @@ React を知っていると、いくらか知識が流用できる。（Rust の
 
 # デモページ
 
-https://tsuyopon-xyz.github.io/practice-rust-app-with-yew/
+https://practice-rust-app-with-yew.vercel.app/
 
 # 開発時に起動するコマンド
 
