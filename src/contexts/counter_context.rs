@@ -38,7 +38,6 @@ impl Reducible for Counter {
     }
 }
 
-/// Main component
 #[function_component(CounterProvider)]
 pub fn counter_provider(props: &Props) -> Html {
     let counter = use_reducer(Counter::default);
