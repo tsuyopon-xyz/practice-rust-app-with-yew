@@ -4,6 +4,10 @@ Rust を使った Web フロントエンド開発ができるフレームワー�
 
 React を知っていると、いくらか知識が流用できる。（Rust の文法を知っている必要はある）
 
+# デモページ
+
+https://tsuyopon-xyz.github.io/practice-rust-app-with-yew/
+
 # 開発時に起動するコマンド
 
 2 つのターミナルを起動して、以下の 2 つのコマンドを実行する
